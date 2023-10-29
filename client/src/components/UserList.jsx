@@ -1,9 +1,21 @@
 import { User } from "./User"
+import { useState } from "react"
+import UserDetails from "./UserDetails";
 
 export const UserList = ({
     users,
 })=> {
+
+const [selectedUser, setSelectedUser]=useState(null);
+
+const onInfoClick = (userId)=> {
+    setSelectedUser(userId);
+}
+
     return (
+        <>
+        {selectedUser && <UserDetails />}
+       
     <div className="table-wrapper">
        {/* <!-- Overlap components  -->
 
@@ -131,11 +143,12 @@ export const UserList = ({
             </tr>
           </thead>
           <tbody>
-            {users.map (u=> <User key={u._id} {...u} />)}
+            {users.map (u=> <User key={u._id} {...u} onInfoClick={onInfoClick} />)}
             
           
           </tbody>
         </table>
       </div>
+      </>
     )
 }
