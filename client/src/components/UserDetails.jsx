@@ -1,4 +1,16 @@
-export default function UserDetails (){
+import { formatDate } from "../utils/dateUtils"
+
+export default function UserDetails ({
+    _id,
+    firstName,
+    lastName,
+    email,
+    imageUrl,
+    createdAt,
+    updatedAt,
+    phoneNumber, 
+    onClose, address
+}){
     return (
         <div className="overlay">
         <div className="backdrop"></div>
@@ -6,7 +18,7 @@ export default function UserDetails (){
           <div className="detail-container">
             <header className="headers">
               <h2>User Detail</h2>
-              <button className="btn close">
+              <button className="btn close" onClick={onClose}>
                 <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark"
                   className="svg-inline--fa fa-xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
                   <path fill="currentColor"
@@ -17,24 +29,24 @@ export default function UserDetails (){
             </header>
             <div className="content">
               <div className="image-container">
-                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt=""
+                <img src={imageUrl} alt="{`${firstName} ${lastName}`}"
                   className="image" />
               </div>
               <div className="user-details">
-                <p>User Id: <strong>62bb0c0eda039e2fdccba57b</strong></p>
+                <p>User Id: <strong>{_id}</strong></p>
                 <p>
                   Full Name:
-                  <strong> Peter Johnson </strong>
+                  <strong> {`${firstName} ${lastName}`} </strong>
                 </p>
-                <p>Email: <strong>peter@abv.bg</strong></p>
-                <p>Phone Number: <strong>0812345678</strong></p>
+                <p>Email: <strong>{email}</strong></p>
+                <p>Phone Number: <strong>{phoneNumber}</strong></p>
                 <p>
                   Address:
-                  <strong> Bulgaria, Sofia, Aleksandar Malinov 78 </strong>
+                  <strong>add</strong>
                 </p>
   
-                <p>Created on: <strong>Wednesday, June 28, 2022</strong></p>
-                <p>Modified on: <strong>Thursday, June 29, 2022</strong></p>
+                <p>Created on: <strong>{formatDate(createdAt)}</strong></p>
+                <p>Modified on: <strong>{formatDate(updatedAt)}</strong></p>
               </div>
             </div>
           </div>
@@ -43,3 +55,4 @@ export default function UserDetails (){
   
     )
 }
+//{`${address.contry}, ${address.city}, ${address.street} ${address.streetNumber}`}

@@ -14,6 +14,7 @@ function App() {
         userService.getAll()
             .then(users => {
                 setUsers(users);
+                console.log(users)
             })
             .catch(err => {
                 console.log("Error" + err);
@@ -27,6 +28,8 @@ function App() {
                 <section className="card users-container">
                     <Search />
                     <UserList users={users}/>
+                    <button className="btn-add btn">Add new user</button>
+
                 </section>
             </main>
             <Footer />
