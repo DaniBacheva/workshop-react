@@ -2,12 +2,14 @@ import { User } from "./User"
 import { useState } from "react"
 import UserDetails from "./UserDetails";
 import * as userService from '../services/userService'
+import { UserCreate } from "./UserCreate";
 
 export const UserList = ({
   users,
 }) => {
 
   const [selectedUser, setSelectedUser] = useState(null);
+  const [showAddUser, setShowAddUser] = useState(false)
 
   const onInfoClick = async (userId) => {  // do not work
    // const user = await userService.getOne(userId)
@@ -24,8 +26,16 @@ export const UserList = ({
   const onClose = () => {
     setSelectedUser(null)
   }
+
+const onUserAddClick=()=>{
+setShowAddUser(true);
+}
+
+
+
   return (
     <>
+    {showAddUser&& <UserCreate />}
       {selectedUser && <UserDetails {...selectedUser} onClose={onClose} />}
       <div className="table-wrapper">
         {/* <!-- Overlap components  -->
@@ -154,12 +164,13 @@ export const UserList = ({
             </tr>
           </thead>
           <tbody>
-            {users.map(u => <User key={u._id} {...u} onInfoClick={onInfoClick} />)}
 
+            {users.map(u => <User key={u._id} {...u} onInfoClick={onInfoClick} />)}
 
           </tbody>
         </table>
       </div>
+      <button className="btn-add btn" onClick={onUserAddClick}>Add new user</button>
     </>
   )
 }
