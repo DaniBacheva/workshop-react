@@ -8,7 +8,7 @@ import { UserList } from './components/UserList'
 import * as userService from './services/userService'
 
 function App() {
-    const [users, setUsers] = useState([0])
+    const [users, setUsers] = useState([])
 
     useEffect(() => {
         userService.getAll()
@@ -21,14 +21,37 @@ function App() {
             });
     }, []);
 
+    async function onUserCreateSubmit(e) {
+        //stop reloading
+        e.preventDefault();
+
+        //take data from dom tree
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData);
+
+        //send ajax request to server
+        const createdUser = await userService.create(data);
+
+        //if success add new user to state
+        setUsers(state => [...state, createdUser])
+
+    }
+
+   // const onDeleteClick = async (userId)
+
+
+
     return (
         <>
             <Header />
             <main>
                 <section className="card users-container">
                     <Search />
-                    <UserList users={users}/>
-                    
+                    <UserList
+                        users={users}
+                        onUserCreateSubmit={onUserCreateSubmit}
+                        onDeleteClick={onDeleteClick} />
+
 
                 </section>
             </main>

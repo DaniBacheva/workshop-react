@@ -6,6 +6,10 @@ import { UserCreate } from "./UserCreate";
 
 export const UserList = ({
   users,
+  onUserCreateSubmit,
+  onDeleteClick,
+  
+
 }) => {
 
   const [selectedUser, setSelectedUser] = useState(null);
@@ -24,19 +28,25 @@ export const UserList = ({
   };
 
   const onClose = () => {
-    setSelectedUser(null)
+    setSelectedUser(null);
+    setShowAddUser(false)
   }
 
-const onUserAddClick=()=>{
-setShowAddUser(true);
+const onUserAddClick=(e)=>{
+  setShowAddUser(true);
 }
 
-
+const onUserCreateSubmitHandler =(e)=> {
+  onUserCreateSubmit(e)
+  setShowAddUser(false)
+}
 
   return (
     <>
-    {showAddUser&& <UserCreate />}
-      {selectedUser && <UserDetails {...selectedUser} onClose={onClose} />}
+    {showAddUser&& <UserCreate onClose={onClose} />}
+      {selectedUser && <UserDetails {...selectedUser} 
+      onClose={onClose} 
+      onUserCreateSubmit={onUserCreateSubmitHandler} />}
       <div className="table-wrapper">
         {/* <!-- Overlap components  -->
 
@@ -165,7 +175,11 @@ setShowAddUser(true);
           </thead>
           <tbody>
 
-            {users.map(u => <User key={u._id} {...u} onInfoClick={onInfoClick} />)}
+            {users.map(u => <User 
+            {...u} 
+            key={u._id} 
+            onInfoClick={onInfoClick}
+            onDeleteClick={onDeleteClick}/>)}
 
           </tbody>
         </table>
