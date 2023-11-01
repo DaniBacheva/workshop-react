@@ -16,14 +16,14 @@ export const UserList = ({
   const [showAddUser, setShowAddUser] = useState(false)
 
   const onInfoClick = async (userId) => {  // do not work
-   // const user = await userService.getOne(userId)
+   const user = await userService.getOne(userId)
 
-   // setSelectedUser(user);
+   setSelectedUser(user);
 
-   // console.log(user);
-     const user = users.find(u=>u._id===userId);
-      setSelectedUser(user); 
-     console.log(user)
+    console.log(user);
+    // const user = users.find(u=>u._id===userId);
+    //  setSelectedUser(user); 
+    // console.log(user)
 
   };
 

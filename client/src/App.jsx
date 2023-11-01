@@ -37,7 +37,11 @@ function App() {
 
     }
 
-   // const onDeleteClick = async (userId)
+    const onDeleteClick = async (userId)=> {
+        //delete from server
+
+        //delete fron state
+    }
 
 
 

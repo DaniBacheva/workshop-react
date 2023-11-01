@@ -42,7 +42,7 @@ export default function UserDetails ({
                 <p>Phone Number: <strong>{phoneNumber}</strong></p>
                 <p>
                   Address:
-                  <strong>add</strong>
+                  <strong>{`${address.country}, ${address.city}, ${address.street} ${address.streetNumber}`}</strong>
                 </p>
   
                 <p>Created on: <strong>{formatDate(createdAt)}</strong></p>
